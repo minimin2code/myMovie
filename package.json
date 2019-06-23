@@ -4,7 +4,7 @@
   "description": "",
   "main": "movie.js",
   "scripts": {
-    "start": "node app.js"
+    "start": "movie.js"
   },
   "repository": {
     "type": "git",
