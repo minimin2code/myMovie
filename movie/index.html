@@ -1,0 +1,203 @@
+
+<!-- saved from url=(0042)file:///C:/Users/Home/Downloads/index.html -->
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+
+<style>	
+	h1 {
+		color: #7157ff;
+	}
+
+	hr {
+		display: block;
+		border: 0;
+		border-top: 3px solid #f90;
+		padding: 0; 
+	}
+	
+	textarea {
+		width: 70%;
+	}
+	
+	#div_main {
+		font-family: Sans-serif;
+		margin: auto;
+		margin-top: 30px;
+		width: 520px;
+	}
+	
+	#div_left {
+		width: 170px;
+		float: left;
+	}
+	
+	#div_left p {
+		margin-bottom: 19px;
+	}
+	
+	#div_right {
+		width: 350px;
+		float: right;
+	}
+	
+	.clear {
+		clear: both;
+	}
+
+	.error,  #txtDescriptionEmpty
+    {
+    	 
+		
+       border:2px solid #FF0000;
+           
+    }
+
+    .white
+    {
+    	background-color:White;  
+		border:none;  	
+    }
+
+ 
+
+	#divMessage{
+		color:red;
+	} 
+
+
+
+
+
+	
+</style>
+
+<script language="javascript">
+	
+	function frmValidate(){
+
+
+		//retrieve the corresponding element
+		var name= document.getElementById("txtName");
+		var director=document.getElementById("txtDirector");
+		var picName=document.getElementById("txtPicName");
+		var boxOffice=document.getElementById("txtBoxOffice");
+		var description=document.getElementById("txtDescription");
+		var DrpDn=document.getElementById("selectType");
+		
+
+		var msgBox= document.getElementById("divMessage");
+		
+		msgBox.innerHTML="";
+
+
+		 if(name.value==""){
+		//update the error message, highlight colour and Boolean value to prevent submission of form 
+		msgBox.innerHTML += "Name cannot be empty";
+		name.setAttribute("class","error");
+		success = false;
+		 }
+
+		// option type check; restrict user to only the 4 options
+		var e = document.getElementById("selectType");
+		var strTxt = e.options[e.selectedIndex].text;
+		var strVal = e.options[e.selectedIndex].value;
+
+		if ((strTxt !== "Horror" || strVal !== "horror") & (strTxt !== "Comedy" || strVal !== "comedy") & (strTxt!== "Action" ||strVal!== "action") & (strTxt!=="Sci-Fi" ||strVal!=="scifi") ){
+			msgBox.innerHTML +="<br>"+ "Please select a valid option (Horror, Comedy, Action or Sci-Fi) for Type";
+			DrpDn.setAttribute("class","error"); 
+			success = false;
+			};
+
+
+		if(picName.value==""){
+			//update the error message, highlight colour and Boolean value to prevent submission of form 
+			msgBox.innerHTML += "<br>" + "Picture Name cannot be empty";
+			picName.setAttribute("class","error");
+			success = false;
+		 }
+	
+		 if(director.value==""){
+			//update the error message, highlight colour and Boolean value to prevent submission of form 
+			msgBox.innerHTML += "<br>" + "Director cannot be empty";
+			director.setAttribute("class","error");
+			success = false;
+		 }
+
+		 //number handling for box office
+		 if(boxOffice.value=="" || isNaN(boxOffice.value)){
+			//update the error message, highlight colour and Boolean value to prevent submission of form 
+			msgBox.innerHTML += "<br>" + "Please enter a valid number for Box Office";
+			boxOffice.setAttribute("class","error");
+			success = false;
+		 } 
+
+		 if(description.value==""){
+			//update the error message, highlight colour and Boolean value to prevent submission of form 
+			msgBox.innerHTML += "<br>" + "Description cannot be empty";
+			description.setAttribute("id","txtDescriptionEmpty");
+			success = false;
+		 }
+		 return success;
+		  
+	}
+
+
+
+	</script>
+
+</head>
+<body>
+<div id="div_main">
+	<h1>
+		Add Movie Title
+	</h1>
+	<hr>
+	<!--<form action="./process.html" method="POST">-->	
+	<form action="/movie" method="POST">
+	
+	
+	<div id="div_left">
+		<p>Name:</p>
+		<p>Type:</p>
+		<p>Picture Name:</p>
+		<p>Director:</p>
+		<p>Box Office ($):</p>
+	</div>
+	<div id="div_right">
+		<p><input type="text" id="txtName" name="txtName"></p> 
+		<p>
+		<select id="selectType" name="selectType">
+			<option> Select a Type</option>
+			<option value="horror">Horror</option>
+			<option value="comedy">Comedy</option>
+			<option value="action">Action</option>
+			<option value="scifi">Sci-Fi</option>
+		</select>
+		</p>
+		<p><input type="text" id="txtPicName" name="txtPicName"></p>
+		<p><input type="text" id="txtDirector" name="txtDirector"></p>
+		<p><input type="text" id="txtBoxOffice" name="txtBoxOffice"></p>
+	</div>
+	<div class="clear"></div>
+
+	Description:
+	<br>
+	<textarea id="txtDescription" name="txtDescription"></textarea>
+	<br>
+<!--<button type="submit" id="btnSubmit" name = "btnSubmit" onclick="return formChk()">Submit </button>-->	
+<button type="submit" onclick="return frmValidate()">Submit</button>
+<button type = "reset" onClick="window.location.reload();">Cancel</button>
+
+
+
+</form>
+
+		
+
+	<div id="divMessage"></div>
+	
+
+</div>
+
+</body></html>
